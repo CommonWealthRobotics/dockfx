@@ -46,11 +46,6 @@ public class ContentTabPane extends TabPane implements ContentPane {
         setTabMinWidth(w);
     }
 
-    private void setTabTooltip(DockNodeTab t) {
-        t.setTooltip(new Tooltip(t.getTitle()));
-        //System.err.println("\n\nAdding tooltip"+ t.getTooltip().getText()+" : "+t.getText());
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -136,7 +131,7 @@ public class ContentTabPane extends TabPane implements ContentPane {
     }
 
     public void addDockNodeTab(DockNodeTab dockNodeTab) {
-        setTabTooltip(dockNodeTab);
+        dockNodeTab.setTooltip(new Tooltip(dockNodeTab.getTitle()));
         getTabs().add(dockNodeTab);
         getSelectionModel().select(dockNodeTab);
     }
