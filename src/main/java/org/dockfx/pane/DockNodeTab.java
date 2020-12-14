@@ -1,7 +1,6 @@
 package org.dockfx.pane;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.control.Tab;
 
 import org.dockfx.DockNode;
@@ -16,15 +15,15 @@ public class DockNodeTab extends Tab
 
   final private DockNode dockNode;
 
-  final private StringProperty title;
+  final private SimpleStringProperty title;
 
   public DockNodeTab(DockNode node)
   {
     this.dockNode = node;
     setClosable(false);
 
-    title = dockNode.titleProperty();
-    //title.bind(dockNode.titleProperty());
+    title = new SimpleStringProperty("");
+    title.bind(dockNode.titleProperty());
 
     setGraphic(dockNode.getDockTitleBar());
     setContent(dockNode);
@@ -34,13 +33,11 @@ public class DockNodeTab extends Tab
 
   public String getTitle()
   {
-    //new RuntimeException("Getting name "+title.getValue()).printStackTrace();
     return title.getValue();
   }
 
-  public StringProperty titleProperty()
+  public SimpleStringProperty titleProperty()
   {
-    //new RuntimeException("Getting name prop"+title.getValue()).printStackTrace();
     return title;
   }
 
