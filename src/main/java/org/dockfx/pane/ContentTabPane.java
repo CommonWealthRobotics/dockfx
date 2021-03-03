@@ -1,5 +1,6 @@
 package org.dockfx.pane;
 
+import javafx.scene.control.Tooltip;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
@@ -7,12 +8,14 @@ import java.util.stream.Collectors;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Skin;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
 import org.dockfx.DockNode;
 import org.dockfx.DockPos;
 import org.dockfx.pane.skin.ContentTabPaneSkin;
 
+import javafx.collections.ListChangeListener;
 /**
  * ContentTabPane holds multiple tabs
  *
@@ -25,7 +28,21 @@ public class ContentTabPane extends TabPane implements ContentPane
 
   public ContentTabPane()
   {
-  }
+	    getTabs().addListener((ListChangeListener<? super Tab>)  observable -> {
+	      updateTabWidth();
+	    });
+	    widthProperty().addListener((obs, oldVal, newVal) -> {
+	      updateTabWidth();
+	    });
+	  }
+	  private void updateTabWidth(){
+	    if(getTabs().size()<1)
+	      return;
+	    int sizeOffsetToRemoveTheCarrot = 120;
+		double w = (getWidth()-sizeOffsetToRemoveTheCarrot)/((double)getTabs().size());
+	    setTabMaxWidth(w);
+	    setTabMinWidth(w);
+	  }
 
   /** {@inheritDoc} */
   @Override
@@ -127,6 +144,7 @@ public class ContentTabPane extends TabPane implements ContentPane
 
   public void addDockNodeTab(DockNodeTab dockNodeTab)
   {
+	  dockNodeTab.setTooltip(new Tooltip(dockNodeTab.getTitle()));
     getTabs().add(dockNodeTab);
     getSelectionModel().select(dockNodeTab);
   }
