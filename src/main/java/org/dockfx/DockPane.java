@@ -1048,7 +1048,9 @@ public class DockPane extends StackPane
 
     try (
         XMLDecoder decoder =
-                           new XMLDecoder(new BufferedInputStream(new FileInputStream(filePath)), Thread.currentThread().getContextClassLoader()))
+                           new XMLDecoder(new BufferedInputStream(new FileInputStream(filePath)),
+                                          Thread.currentThread()
+                                                .getContextClassLoader()))
     {
       contents =
                (HashMap<String, ContentHolder>) decoder.readObject();
@@ -1129,7 +1131,7 @@ public class DockPane extends StackPane
     // the preference file,
     // The below logic prevents from the window hidden in outside the current
     // screen
-	Rectangle2D screen = Screen.getPrimary().getBounds();
+    Rectangle2D screen = Screen.getPrimary().getBounds();
 
     if (windowPosition[0] > screen.getMaxX())
     {
@@ -1296,7 +1298,7 @@ public class DockPane extends StackPane
               DockNode newNode = delayOpenHandler.open((String) item);
               if (newNode != null)
               {
-              	dockNodeList.add( newNode );
+                dockNodeList.add(newNode);
               }
             }
             else
@@ -1306,10 +1308,10 @@ public class DockPane extends StackPane
       }
 
       for (DockNode n : dockNodeList)
-	  {
-		n.dockedProperty().set(true);
-		tabPane.addDockNodeTab(new DockNodeTab(n));
-	  }
+      {
+        n.dockedProperty().set(true);
+        tabPane.addDockNodeTab(new DockNodeTab(n));
+      }
 
       if (parent != null)
         tabPane.setContentParent(parent);

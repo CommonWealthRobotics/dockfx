@@ -1126,9 +1126,11 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>
 
   private DockPane prevDockPane;
 
-  public DockPane getPrevDockPane() {
-  	return prevDockPane;
+  public DockPane getPrevDockPane()
+  {
+    return prevDockPane;
   }
+
   /**
    * Dock this node into a dock pane.
    * 
