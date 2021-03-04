@@ -145,26 +145,24 @@ public class ContentTabPane extends TabPane implements ContentPane
   private DockNodeTab makeDNT(Node node) {
 	DockNode newNode = (DockNode) node;
     DockNodeTab t = new DockNodeTab(newNode);
-    newNode.setFocusRequestListener(() -> {
-		Platform.runLater(() -> {
-			javafx.scene.control.SingleSelectionModel<Tab> selectionModel = getSelectionModel();
-			selectionModel.select(t);
-		});
-	});
+    setUpSelectionEvent(t);
 	return t;
   }
 
 	public void addDockNodeTab(DockNodeTab dockNodeTab) {
+		setUpSelectionEvent(dockNodeTab);
+		dockNodeTab.setTooltip(new Tooltip(dockNodeTab.getTitle()));
+		getTabs().add(dockNodeTab);
+		getSelectionModel().select(dockNodeTab);
+
+	}
+	private void setUpSelectionEvent(DockNodeTab dockNodeTab) {
 		dockNodeTab.dockNode.setFocusRequestListener(() -> {
 			Platform.runLater(() -> {
 				javafx.scene.control.SingleSelectionModel<Tab> selectionModel = getSelectionModel();
 				selectionModel.select(dockNodeTab);
 			});
 		});
-		dockNodeTab.setTooltip(new Tooltip(dockNodeTab.getTitle()));
-		getTabs().add(dockNodeTab);
-		getSelectionModel().select(dockNodeTab);
-
 	}
 
   @Override
