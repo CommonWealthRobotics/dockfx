@@ -15,6 +15,7 @@ import org.dockfx.DockNode;
 import org.dockfx.DockPos;
 import org.dockfx.pane.skin.ContentTabPaneSkin;
 
+import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 /**
  * ContentTabPane holds multiple tabs
@@ -34,15 +35,15 @@ public class ContentTabPane extends TabPane implements ContentPane
 	    widthProperty().addListener((obs, oldVal, newVal) -> {
 	      updateTabWidth();
 	    });
-	  }
-	  private void updateTabWidth(){
+  }
+  private void updateTabWidth(){
 	    if(getTabs().size()<1)
 	      return;
-	    int sizeOffsetToRemoveTheCarrot = 120;
+	    int sizeOffsetToRemoveTheCarrot = 105;
 		double w = (getWidth()-sizeOffsetToRemoveTheCarrot)/((double)getTabs().size());
 	    setTabMaxWidth(w);
 	    setTabMinWidth(w);
-	  }
+  }
 
   /** {@inheritDoc} */
   @Override
@@ -115,8 +116,9 @@ public class ContentTabPane extends TabPane implements ContentPane
 
   public void set(int idx, Node node)
   {
-    DockNode newNode = (DockNode) node;
-    getTabs().set(idx, new DockNodeTab(newNode));
+	DockNodeTab t = makeDNT(node);
+	
+	getTabs().set(idx, t);
     getSelectionModel().select(idx);
   }
 
@@ -137,17 +139,33 @@ public class ContentTabPane extends TabPane implements ContentPane
                       Node node,
                       DockPos dockPos)
   {
-    DockNode newNode = (DockNode) node;
-    DockNodeTab t = new DockNodeTab(newNode);
+    DockNodeTab t = makeDNT(node);
     addDockNodeTab(t);
   }
-
-  public void addDockNodeTab(DockNodeTab dockNodeTab)
-  {
-	  dockNodeTab.setTooltip(new Tooltip(dockNodeTab.getTitle()));
-    getTabs().add(dockNodeTab);
-    getSelectionModel().select(dockNodeTab);
+  private DockNodeTab makeDNT(Node node) {
+	DockNode newNode = (DockNode) node;
+    DockNodeTab t = new DockNodeTab(newNode);
+    newNode.setFocusRequestListener(() -> {
+		Platform.runLater(() -> {
+			javafx.scene.control.SingleSelectionModel<Tab> selectionModel = getSelectionModel();
+			selectionModel.select(t);
+		});
+	});
+	return t;
   }
+
+	public void addDockNodeTab(DockNodeTab dockNodeTab) {
+		dockNodeTab.dockNode.setFocusRequestListener(() -> {
+			Platform.runLater(() -> {
+				javafx.scene.control.SingleSelectionModel<Tab> selectionModel = getSelectionModel();
+				selectionModel.select(dockNodeTab);
+			});
+		});
+		dockNodeTab.setTooltip(new Tooltip(dockNodeTab.getTitle()));
+		getTabs().add(dockNodeTab);
+		getSelectionModel().select(dockNodeTab);
+
+	}
 
   @Override
   protected double computeMaxWidth(double height)

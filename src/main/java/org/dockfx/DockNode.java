@@ -193,13 +193,19 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>
                                                 return "maximized";
                                               }
                                             };
-
+  private Runnable focusRequestListener=null;                                        
   public DockNode(Node contents,
                   String title,
                   Node graphic,
                   DockFXViewController controller)
   {
     initializeDockNode(contents, title, graphic, controller);
+  }
+  @Override
+  public void requestFocus(){
+	  super.requestFocus();
+	  if(getFocusRequestListener()!=null)
+		  getFocusRequestListener().run();
   }
 
   /**
@@ -1369,4 +1375,10 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>
       }
     }
   }
+public Runnable getFocusRequestListener() {
+	return focusRequestListener;
+}
+public void setFocusRequestListener(Runnable focusRequestListener) {
+	this.focusRequestListener = focusRequestListener;
+}
 }

@@ -13,7 +13,7 @@ import org.dockfx.DockNode;
 public class DockNodeTab extends Tab
 {
 
-  final private DockNode dockNode;
+  final public DockNode dockNode;
 
   final private SimpleStringProperty title;
 
