@@ -39,7 +39,7 @@ public class ContentTabPane extends TabPane implements ContentPane
   private void updateTabWidth(){
 	    if(getTabs().size()<1)
 	      return;
-	    int sizeOffsetToRemoveTheCarrot = 105;
+	    int sizeOffsetToRemoveTheCarrot = 50;
 		double w = (getWidth()-sizeOffsetToRemoveTheCarrot)/((double)getTabs().size());
 	    setTabMaxWidth(w);
 	    setTabMinWidth(w);
