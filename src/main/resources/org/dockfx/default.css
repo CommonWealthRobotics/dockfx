@@ -183,7 +183,8 @@
   -fx-padding: 0;
   -fx-spacing: 0;
   -fx-outer-border;
-  -fx-alignment: CENTER-RIGHT;
+  -fx-alignment: top-left;
+  -fx-background-color: red;
 }
 
 

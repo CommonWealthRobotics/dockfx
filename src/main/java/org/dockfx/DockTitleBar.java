@@ -132,7 +132,7 @@ public class DockTitleBar extends HBox
     this.getStyleClass().add("dock-title-bar");
 
     // create a pane that will stretch to make the buttons right aligned
-    Pane fillPane = new Pane();
+    HBox fillPane = new HBox();
     HBox.setHgrow(fillPane, Priority.ALWAYS);
 
     dockNode.closableProperty()
