@@ -178,3 +178,14 @@
 .dock-minimize-button {
   -fx-graphic: url(minimize.png);
 }
+
+.tab-pane > .tab-header-area > .headers-region {
+  -fx-padding: 0;
+  -fx-spacing: 0;
+  -fx-outer-border;
+  -fx-alignment: CENTER-RIGHT;
+}
+
+
+
+
