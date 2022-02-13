@@ -39,11 +39,16 @@ public class ContentTabPane extends TabPane implements ContentPane
   private void updateTabWidth(){
 	    if(getTabs().size()<1)
 	      return;
-	    int sizeOffsetToRemoveTheCarrot = 50;
+	    int sizeOffsetToRemoveTheCarrot = getTabs().size()*18;
 		double w = (getWidth()-sizeOffsetToRemoveTheCarrot)/((double)getTabs().size());
-	    //setTabMaxWidth(w);
-	    //setTabMinWidth(w);
-	    
+		if(w<138)
+			w=138;
+	    setTabMaxWidth(w);
+	    setTabMinWidth(w);
+	    for(Tab t:getTabs()) {
+	    	DockNodeTab dnt =(DockNodeTab)t;
+	    	dnt.setWidthOfGraphic(w);
+	    }
   }
 
   /** {@inheritDoc} */
