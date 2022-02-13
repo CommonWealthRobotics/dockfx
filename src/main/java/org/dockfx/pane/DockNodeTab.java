@@ -28,6 +28,8 @@ public class DockNodeTab extends Tab
     title.bind(dockNode.titleProperty());
 
     dockTitleBar = dockNode.getDockTitleBar();
+    dockTitleBar.getStyleClass().add("dock-title-bar");
+
 	setGraphic(dockTitleBar);
     setContent(dockNode);
     dockNode.tabbedProperty().set(true);
@@ -50,5 +52,6 @@ public class DockNodeTab extends Tab
   }
   public void setWidthOfGraphic(double w) {
 	  dockTitleBar.setPrefWidth(w);
+
   }
 }
