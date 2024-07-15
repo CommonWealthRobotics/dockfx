@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.Stack;
 
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableObjectValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -54,6 +55,7 @@ import javafx.stage.Window;
  */
 public class DockTitleBar extends HBox implements EventHandler<MouseEvent>
 {
+    IWindowsProvider providerOfWindows;
 
   /**
    * The DockNode this node is a title bar for.
@@ -77,7 +79,7 @@ public class DockTitleBar extends HBox implements EventHandler<MouseEvent>
   public DockTitleBar(DockNode dockNode)
   {
     this.dockNode = dockNode;
-
+    providerOfWindows=dockNode;
     label = new Label("Dock Title Bar");
     label.textProperty().bind(dockNode.titleProperty());
     label.graphicProperty().bind(dockNode.graphicProperty());
@@ -315,16 +317,10 @@ public class DockTitleBar extends HBox implements EventHandler<MouseEvent>
     // RFE for public scene graph traversal API filed but closed:
     // https://bugs.openjdk.java.net/browse/JDK-8133331
 
-    Iterator<Window> windows = Window.impl_getWindows();
+	ArrayList<Stage> windows = providerOfWindows.get();
 
     // fire the dock over event for the active stages
-    for (Window window :new Iterable<Window>() { 
-        @Override
-        public Iterator<Window> iterator() 
-        { 
-            return windows; 
-        } 
-    }) {
+    for (Window window :windows) {
 
       if (!(window instanceof Stage)) {
         continue;

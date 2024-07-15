@@ -47,6 +47,8 @@ import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
 
+import java.util.ArrayList;
+
 import org.dockfx.pane.DockNodeTab;
 import org.dockfx.viewControllers.DockFXViewController;
 
@@ -58,7 +60,7 @@ import org.dockfx.viewControllers.DockFXViewController;
  * 
  * @since DockFX 0.1
  */
-public class DockNode extends VBox implements EventHandler<MouseEvent>
+public class DockNode extends VBox implements EventHandler<MouseEvent>, IWindowsProvider
 {
   /**
    * The style this dock node should use on its stage when set to floating.
@@ -463,7 +465,7 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>
       }
 
       stage = new Stage();
-
+      stages.add(stage);
       dockPane.getScene()
               .getWindow()
               .addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST,
@@ -473,6 +475,7 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>
                                 public void handle(WindowEvent event)
                                 {
                                   stage.close();
+                                  stages.remove(stage);
                                 }
                               });
 
@@ -615,7 +618,7 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>
       stage.removeEventFilter(MouseEvent.MOUSE_PRESSED, this);
       stage.removeEventFilter(MouseEvent.MOUSE_MOVED, this);
       stage.removeEventFilter(MouseEvent.MOUSE_DRAGGED, this);
-
+      stages.remove(stage);
       stage.close();
     }
   }
@@ -1227,6 +1230,7 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>
    */
   private boolean sizeWest = false, sizeEast = false,
       sizeNorth = false, sizeSouth = false;
+private ArrayList<Stage> stages;
 
   /**
    * Gets whether the mouse is currently in this dock node's resize zone.
@@ -1367,4 +1371,10 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>
       }
     }
   }
+
+@Override
+public ArrayList<Stage> get() {
+	// TODO Auto-generated method stub
+	return stages;
+}
 }
