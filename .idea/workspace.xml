@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="001efabc-6851-4fb8-8a55-3b26d5375ac9" name="Changes" comment="lombok removed. It was generating modular problems&#10;&#10;https://stackoverflow.com/questions/78177259/gluon-build-problem-specifies-unknown-module-javafx-graphics">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="module" />
+    </option>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+        <option value="module-info" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2dUa9CjvFLbaSpOi5ISEW7Q2w6F" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.DockFX.executor&quot;: &quot;Run&quot;,
+    &quot;Application.FxmlDemo.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;/home/oz-mint/Downloads/DockFX/src/test/java&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="QodanaReportsService">
+    <option name="descriptions">
+      <ReportDescription localRun="true" path="/tmp/qodana_output/qodana.sarif.json" reportGuid="d6223d67-cd9c-4aa1-907b-0e69d9665344" reportId="DockFX/qodana/2024-03-16" />
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.dockfx" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/org/dockfx" />
+      <recent name="$PROJECT_DIR$/src/test/resources" />
+      <recent name="$PROJECT_DIR$/src/main/resources/org/dockfx" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.dockfx" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.DockFX">
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="DockFX" />
+      <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="DockFX" />
+      <working_directory value="$PROJECT_DIR$" />
+      <go_parameters value="-i" />
+      <kind value="DIRECTORY" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="DockFX" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="DockFX" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.DockFX" />
+      <item itemvalue="Application.FxmlDemo" />
+    </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-78a6f59c" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="001efabc-6851-4fb8-8a55-3b26d5375ac9" name="Changes" comment="" />
+      <created>1710064958983</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1710064958983</updated>
+      <workItem from="1710064962209" duration="257000" />
+      <workItem from="1710065578907" duration="10000000" />
+      <workItem from="1710077286356" duration="826000" />
+      <workItem from="1710078398472" duration="7548000" />
+      <workItem from="1710184874067" duration="98000" />
+      <workItem from="1710186964791" duration="6374000" />
+      <workItem from="1710604919224" duration="2405000" />
+      <workItem from="1710608602875" duration="3554000" />
+      <workItem from="1710612389138" duration="5267000" />
+      <workItem from="1710619323809" duration="13593000" />
+      <workItem from="1710636947075" duration="21015000" />
+      <workItem from="1710881521066" duration="2801000" />
+    </task>
+    <task id="LOCAL-00001" summary="- javafx moved to 21&#10;- java moved to 17&#10;- demo moved to test">
+      <option name="closed" value="true" />
+      <created>1710085085514</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1710085085514</updated>
+    </task>
+    <task id="LOCAL-00002" summary="- javafx moved to 21&#10;- java moved to 17&#10;- demo moved to test">
+      <option name="closed" value="true" />
+      <created>1710085228968</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1710085228968</updated>
+    </task>
+    <task id="LOCAL-00003" summary="- pom clean up">
+      <option name="closed" value="true" />
+      <created>1710086689600</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1710086689600</updated>
+    </task>
+    <task id="LOCAL-00004" summary="- documentation update">
+      <option name="closed" value="true" />
+      <created>1710182807644</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1710182807644</updated>
+    </task>
+    <task id="LOCAL-00005" summary="- pom clean up">
+      <option name="closed" value="true" />
+      <created>1710184941676</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1710184941676</updated>
+    </task>
+    <task id="LOCAL-00006" summary="- code formatting">
+      <option name="closed" value="true" />
+      <created>1710607177827</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1710607177827</updated>
+    </task>
+    <task id="LOCAL-00007" summary="- code formatting">
+      <option name="closed" value="true" />
+      <created>1710607214154</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1710607214154</updated>
+    </task>
+    <task id="LOCAL-00008" summary="- FXML use example added&#10;- some refactoring with names and make sure all works if the initialization from FXML">
+      <option name="closed" value="true" />
+      <created>1710636162026</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1710636162027</updated>
+    </task>
+    <task id="LOCAL-00009" summary="- com.sun.javafx imports cleared.&#10;- module info added for java module management">
+      <option name="closed" value="true" />
+      <created>1710674285541</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1710674285541</updated>
+    </task>
+    <task id="LOCAL-00010" summary="- css was missing in floating, that is fixed now&#10;- version 0.0.9 and readme updated">
+      <option name="closed" value="true" />
+      <created>1710688164573</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1710688164573</updated>
+    </task>
+    <task id="LOCAL-00011" summary="- css was missing in floating, that is fixed now&#10;- version 0.0.9 and readme updated">
+      <option name="closed" value="true" />
+      <created>1710690488624</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1710690488624</updated>
+    </task>
+    <task id="LOCAL-00012" summary="lombok removed. It was generating modular problems&#10;&#10;https://stackoverflow.com/questions/78177259/gluon-build-problem-specifies-unknown-module-javafx-graphics">
+      <option name="closed" value="true" />
+      <created>1710883723337</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1710883723337</updated>
+    </task>
+    <task id="LOCAL-00013" summary="lombok removed. It was generating modular problems&#10;&#10;https://stackoverflow.com/questions/78177259/gluon-build-problem-specifies-unknown-module-javafx-graphics">
+      <option name="closed" value="true" />
+      <created>1710883798592</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1710883798592</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="- javafx moved to 21&#10;- java moved to 17&#10;- demo moved to test" />
+    <MESSAGE value="- documentation update" />
+    <MESSAGE value="- pom clean up" />
+    <MESSAGE value="- code formatting" />
+    <MESSAGE value="- FXML use example added&#10;- some refactoring with names and make sure all works if the initialization from FXML" />
+    <MESSAGE value="- com.sun.javafx imports cleared.&#10;- module info added for java module management" />
+    <MESSAGE value="- css was missing in floating, that is fixed now&#10;- version 0.0.9 and readme updated" />
+    <MESSAGE value="lombok removed. It was generating modular problems&#10;&#10;https://stackoverflow.com/questions/78177259/gluon-build-problem-specifies-unknown-module-javafx-graphics" />
+    <option name="LAST_COMMIT_MESSAGE" value="lombok removed. It was generating modular problems&#10;&#10;https://stackoverflow.com/questions/78177259/gluon-build-problem-specifies-unknown-module-javafx-graphics" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/org/dockfx/fxmldemo/MainController.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/dockfx/DockPane.java</url>
+          <line>220</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="com.sun.javafx.fxml.PropertyNotFoundException" package="com.sun.javafx.fxml" />
+          <option name="timeStamp" value="15" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
