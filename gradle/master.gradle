@@ -102,10 +102,10 @@ catch (Throwable e)
 apply from: project.ext.githooksfile
 
 // Bintray upload:
-apply from: project.ext.bintrayfile
+//apply from: project.ext.bintrayfile
 
 // Spotless:
-apply from: project.ext.spotlessfile
+//apply from: project.ext.spotlessfile
 
 
 
