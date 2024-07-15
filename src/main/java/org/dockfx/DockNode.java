@@ -1230,7 +1230,7 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>, IWindows
    */
   private boolean sizeWest = false, sizeEast = false,
       sizeNorth = false, sizeSouth = false;
-private ArrayList<Stage> stages;
+  private static ArrayList<Stage> stages = new ArrayList<Stage>();
 
   /**
    * Gets whether the mouse is currently in this dock node's resize zone.
