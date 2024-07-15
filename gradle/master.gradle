@@ -67,8 +67,6 @@ ext {
 ext.depver = { name -> project.ext.versionsMap[name] }
 
 project.ext.githooksfile = (new File(projectDir,'/gradle/installGitHooks')).getAbsolutePath()
-project.ext.bintrayfile  = (new File(projectDir,'/gradle/bintrayUpload.gradle')).getAbsolutePath()
-project.ext.spotlessfile = (new File(projectDir,'/gradle/spotless.gradle')).getAbsolutePath()
 
 // Download files:
 try {
@@ -103,11 +101,7 @@ catch (Throwable e)
 // Git hooks:
 apply from: project.ext.githooksfile
 
-// Bintray upload:
-apply from: project.ext.bintrayfile
 
-// Spotless:
-apply from: project.ext.spotlessfile
 
 
 

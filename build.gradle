@@ -1,5 +1,4 @@
 plugins {
-	id "com.jfrog.bintray" version "1.8.3"
 	id "com.diffplug.gradle.spotless" version "3.1.0"
 	id "de.undercouch.download" version "3.4.3"
 }
@@ -7,9 +6,6 @@ plugins {
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
-
 
 project.ext.masterfile = (new File(projectDir,'/gradle/master.gradle')).getAbsolutePath()
 
@@ -84,11 +80,13 @@ repositories
 
 
 task sourcesJar(type: Jar, dependsOn:classes) {
+	if (project == rootProject)
 	classifier = 'sources'
 	from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn:javadoc) {
+	if (project == rootProject)
 	classifier = 'javadoc'
 	from javadoc.destinationDir
 }
@@ -113,15 +111,6 @@ artifacts
 			archives sourcesJar
 			archives javadocJar
 		}
-
-publishing {
-	publications {
-		maven(MavenPublication) {
-			from components.java
-			artifact sourcesJar { classifier "sources" }
-		}
-	}
-}
 
 
 
