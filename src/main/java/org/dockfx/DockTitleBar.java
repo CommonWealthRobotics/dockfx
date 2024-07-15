@@ -20,7 +20,10 @@
 
 package org.dockfx;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Stack;
 
 import javafx.beans.value.ChangeListener;
@@ -312,10 +315,16 @@ public class DockTitleBar extends HBox implements EventHandler<MouseEvent>
     // RFE for public scene graph traversal API filed but closed:
     // https://bugs.openjdk.java.net/browse/JDK-8133331
 
-    ObservableList<Window> windows = Window.getWindows();
+    Iterator<Window> windows = Window.impl_getWindows();
 
     // fire the dock over event for the active stages
-    for (Window window : windows) {
+    for (Window window :new Iterable<Window>() { 
+        @Override
+        public Iterator<Window> iterator() 
+        { 
+            return windows; 
+        } 
+    }) {
 
       if (!(window instanceof Stage)) {
         continue;

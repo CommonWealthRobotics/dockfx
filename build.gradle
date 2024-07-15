@@ -107,13 +107,15 @@ group   = project.ext.groupname
 version = project.ext.versionsMap[project.name]
 
 artifacts
-		{
-			archives sourcesJar
-			archives javadocJar
-		}
+{
+	archives sourcesJar
+	archives javadocJar
+}
 
 
-
+tasks.withType(Copy) {
+	duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 
 
 
