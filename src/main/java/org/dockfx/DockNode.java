@@ -3,19 +3,9 @@
  * @brief Class implementing basic dock node with floating and styling.
  *
  * @section License
- *
- *          This file is a part of the DockFX Library. Copyright (C) 2015 Robert B. Colton
- *
- *          This program is free software: you can redistribute it and/or modify it under the terms
- *          of the GNU Lesser General Public License as published by the Free Software Foundation,
- *          either version 3 of the License, or (at your option) any later version.
- *
- *          This program is distributed in the hope that it will be useful, but WITHOUT ANY
- *          WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
- *          PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
- *
- *          You should have received a copy of the GNU Lesser General Public License along with this
- *          program. If not, see <http://www.gnu.org/licenses/>.
+*          This Source Code Form is subject to the terms of the Mozilla Public
+ *          License, v. 2.0. If a copy of the MPL was not distributed with this
+ *          file, You can obtain one at https://mozilla.org/MPL/2.0/.
  **/
 
 package org.dockfx;
@@ -195,13 +185,19 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>, IWindows
                                                 return "maximized";
                                               }
                                             };
-
+  private Runnable focusRequestListener=null;                                        
   public DockNode(Node contents,
                   String title,
                   Node graphic,
                   DockFXViewController controller)
   {
     initializeDockNode(contents, title, graphic, controller);
+  }
+  @Override
+  public void requestFocus(){
+	  super.requestFocus();
+	  if(getFocusRequestListener()!=null)
+		  getFocusRequestListener().run();
   }
 
   /**
@@ -1129,9 +1125,11 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>, IWindows
 
   private DockPane prevDockPane;
 
-  public DockPane getPrevDockPane() {
-  	return prevDockPane;
+  public DockPane getPrevDockPane()
+  {
+    return prevDockPane;
   }
+
   /**
    * Dock this node into a dock pane.
    * 
@@ -1376,5 +1374,11 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>, IWindows
 public ArrayList<Stage> get() {
 	// TODO Auto-generated method stub
 	return stages;
+}
+public Runnable getFocusRequestListener() {
+	return focusRequestListener;
+}
+public void setFocusRequestListener(Runnable focusRequestListener) {
+	this.focusRequestListener = focusRequestListener;
 }
 }

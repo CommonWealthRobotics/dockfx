@@ -7,24 +7,88 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 
-project.ext.masterfile = (new File(projectDir,'/gradle/master.gradle')).getAbsolutePath()
 
-// Attempts to download master gradle file
-if(!hasProperty('do_not_update_master_file'))
-try {
-	download {
-		src 'https://github.com/ClearControl/master/blob/master/master.gradle?raw=true'
-		dest project.ext.masterfile
-		overwrite true
-		onlyIfModified true
-		tempAndMove true
-	}
-}
-catch (Throwable e)
-{
+// Current release versions for Clear* projects:
+
+ext {
+    groupname = "net.clearcontrol"
+    versionsMap = [:]
+
+    // the dependency graph is layed out in 'levels' that represent their dependency depth:
+    // direct dependency is given, dependencies are transitive.
+    // Dependencies in the same level do not depend on each other.
+    // When editiong this file, be carefull that GitHub does not always instantly reflect the changes.
+
+    // Level 0 (don't depend on any other lib):
+    versionsMap['coremem']                 = "0.4.8"
+    versionsMap['dockfx']                  = "0.1.12"
+    versionsMap['cleargl']                 = "2.2.1"  // Ulrik Guenter (skalarproduktraum) is currently maintaing this project and releases versions
+    versionsMap['clearaudio']              = "1.0.2"
+
+    // devices adapters:
+    versionsMap['aptj']                    = "0.0.5"
+    versionsMap['asdkj']                   = "1.0.2"
+    versionsMap['mirao52j']                = "1.0.1"
+    versionsMap['dmp40j']                  = "0.1.0"
+    versionsMap['nirioj']                  = "1.1.0"  // breaking version change from 1.0.2 to 1.1.0
+    versionsMap['andorsdkj']               = "0.1.0"
+    versionsMap['ecc100j']                 = "1.0.1"
+
+    // Level 1:
+    versionsMap['halcyon']                 = "0.3.7"  // depends directly on dockfx
+
+    // device adapters:
+    versionsMap['dcamj']                   = "2.1.7"  // depends directly on coremem
+    versionsMap['clearcl']                 = "0.6.3"  // depends directly on coremem
+
+    // Level 2:
+    versionsMap['clearvolume']             = "1.4.2"  // depends directly on clearcl, clearaudio, cleargl
+    versionsMap['simbryo']                 = "0.9.1"  // depends directly on clearcl
+
+    // Level 3:
+    versionsMap['fastfuse']                = "0.6.5"  // depends directly on symbryo
+
+    // Level 4
+    versionsMap['clearclij']               = "0.3.18"  // depends directly FastFuse and indirectly to ClearCL
+
+    // Level 5:
+    versionsMap['clearcontrol']            = "0.17.0" // depends directly on halcyon, clearvolume, fastfuse, and _all_ devices adapters
+                                                       // breaking version change from 0.16.14 to 0.17.0
+
+    // Level 6:
+    versionsMap['clearcontrol-lightsheet'] = "1.30.0" // depends on clearcontrol only; breaking version change from 1.29.0 to 1.30.0
+
+    // Level 7:
+    versionsMap['clearcontrol-lightsheet-csbd'] = "0.0.1" // depends directly on clearcontrol-lightsheet
+
+    // Loads locale file: ~/.gradle/local.gradle
+    // You can override versions locally for example:
+    //
+    //  ext/versionsMap['symbrio']         = "1.0.1-LR"
+    //
+
+    localfilename = project.gradle.gradleUserHomeDir.getAbsolutePath()+'/local.gradle'
+    if(file(localfilename).exists()){
+        apply from: localfilename
+    }
 }
 
-apply from: project.ext.masterfile
+ext.depver = { name -> project.ext.versionsMap[name] }
+
+tasks.create(name: 'gitExecutableHooks').doLast {
+    Runtime.getRuntime().exec("chmod -R +x .git/hooks/");
+}
+
+task installGitHooks(type: Copy) {
+    from new File(rootProject.rootDir, 'gradle/pre-commit')
+    into { new File(rootProject.rootDir, '.git/hooks') }
+}
+
+gitExecutableHooks.dependsOn installGitHooks
+tasks.clean.dependsOn gitExecutableHooks
+tasks.eclipse.dependsOn gitExecutableHooks
+
+
 
 //***********************************************************************************
 // JAVA CODE BUILDING
@@ -52,17 +116,6 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 
-test
-{
-	testLogging.showStandardStreams = true
-	testLogging
-	{ events "passed", "skipped", "failed" }
-
-	exclude '**/demo/**'
-	exclude '**/run/**'
-
-	maxHeapSize = "4G"
-}
 
 dependencies
 {
@@ -75,7 +128,7 @@ repositories
 	// Main repos:
 	mavenLocal()
 	mavenCentral()
-	jcenter()
+	//jcenter()
 }
 
 
@@ -91,13 +144,6 @@ task javadocJar(type: Jar, dependsOn:javadoc) {
 	from javadoc.destinationDir
 }
 
-if (JavaVersion.current().isJava8Compatible()) {
-	allprojects {
-		tasks.withType(Javadoc) {
-			options.addStringOption('Xdoclint:none', '-quiet')
-		}
-	}
-}
 
 
 //***********************************************************************************

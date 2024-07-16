@@ -2,8 +2,10 @@ package org.dockfx.pane;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.HBox;
 
 import org.dockfx.DockNode;
+import org.dockfx.DockTitleBar;
 
 /**
  * DockNodeTab class holds Tab for ContentTabPane
@@ -13,10 +15,10 @@ import org.dockfx.DockNode;
 public class DockNodeTab extends Tab
 {
 
-  final private DockNode dockNode;
+  final public DockNode dockNode;
 
   final private SimpleStringProperty title;
-
+  DockTitleBar dockTitleBar;
   public DockNodeTab(DockNode node)
   {
     this.dockNode = node;
@@ -25,7 +27,10 @@ public class DockNodeTab extends Tab
     title = new SimpleStringProperty("");
     title.bind(dockNode.titleProperty());
 
-    setGraphic(dockNode.getDockTitleBar());
+    dockTitleBar = dockNode.getDockTitleBar();
+    dockTitleBar.getStyleClass().add("dock-title-bar");
+
+	setGraphic(dockTitleBar);
     setContent(dockNode);
     dockNode.tabbedProperty().set(true);
     dockNode.setNodeTab(this);
@@ -44,5 +49,9 @@ public class DockNodeTab extends Tab
   public void select()
   {
     getTabPane().getSelectionModel().select(this);
+  }
+  public void setWidthOfGraphic(double w) {
+	  dockTitleBar.setPrefWidth(w);
+
   }
 }

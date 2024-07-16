@@ -1,22 +1,22 @@
 package org.dockfx.pane;
 
+import javafx.scene.control.Tooltip;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
-
-import javafx.collections.ListChangeListener;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Skin;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
-import javafx.scene.control.Tooltip;
 import org.dockfx.DockNode;
 import org.dockfx.DockPos;
 import org.dockfx.pane.skin.ContentTabPaneSkin;
 
+import javafx.application.Platform;
+import javafx.collections.ListChangeListener;
 /**
  * ContentTabPane holds multiple tabs
  *
@@ -25,135 +25,158 @@ import org.dockfx.pane.skin.ContentTabPaneSkin;
 public class ContentTabPane extends TabPane implements ContentPane
 {
 
-    ContentPane parent;
+  ContentPane parent;
 
-    public ContentTabPane()
-    {
-        getTabs().addListener((ListChangeListener<? super Tab>)  observable -> {
-            updateTabWidth();
-        });
-        widthProperty().addListener((obs, oldVal, newVal) -> {
-            updateTabWidth();
-        });
-    }
-    private void updateTabWidth(){
-        if(getTabs().size()<1)
-            return;
-        double w = (getWidth()-100)/((double)getTabs().size());
-        setTabMaxWidth(w);
-        setTabMinWidth(w);
-    }
-    /** {@inheritDoc} */
-    @Override
-    protected Skin<?> createDefaultSkin()
-    {
-        return new ContentTabPaneSkin(this);
-    }
+  public ContentTabPane()
+  {
+	    getTabs().addListener((ListChangeListener<? super Tab>)  observable -> {
+	      updateTabWidth();
+	    });
+	    widthProperty().addListener((obs, oldVal, newVal) -> {
+	      updateTabWidth();
+	    });
+  }
+  private void updateTabWidth(){
+	    if(getTabs().size()<1)
+	      return;
+	    int sizeOffsetToRemoveTheCarrot = getTabs().size()*15 +17;
+		double w = (getWidth()-sizeOffsetToRemoveTheCarrot)/((double)getTabs().size());
+		if(w<138)
+			w=138;
+	    setTabMaxWidth(w);
+	    setTabMinWidth(w);
+	    for(Tab t:getTabs()) {
+	    	DockNodeTab dnt =(DockNodeTab)t;
+	    	dnt.setWidthOfGraphic(w);
+	    }
+  }
 
-    public Type getType()
-    {
-        return Type.TabPane;
-    }
+  /** {@inheritDoc} */
+  @Override
+  protected Skin<?> createDefaultSkin()
+  {
+    return new ContentTabPaneSkin(this);
+  }
 
-    public void setContentParent(ContentPane pane)
-    {
-        parent = pane;
-    }
+  public Type getType()
+  {
+    return Type.TabPane;
+  }
 
-    public ContentPane getContentParent()
-    {
-        return parent;
-    }
+  public void setContentParent(ContentPane pane)
+  {
+    parent = pane;
+  }
 
-    public ContentPane getSiblingParent(Stack<Parent> stack,
-                                        Node sibling)
-    {
-        ContentPane pane = null;
+  public ContentPane getContentParent()
+  {
+    return parent;
+  }
 
-        while (!stack.isEmpty())
+  public ContentPane getSiblingParent(Stack<Parent> stack,
+                                      Node sibling)
+  {
+    ContentPane pane = null;
+
+    while (!stack.isEmpty())
+    {
+      Parent parent = stack.pop();
+
+      List<Node> children = parent.getChildrenUnmodifiable();
+
+      if (parent instanceof ContentPane)
+      {
+        children = ((ContentPane) parent).getChildrenList();
+      }
+
+      for (int i = 0; i < children.size(); i++)
+      {
+        if (children.get(i) == sibling)
         {
-            Parent parent = stack.pop();
-
-            List<Node> children = parent.getChildrenUnmodifiable();
-
-            if (parent instanceof ContentPane)
-            {
-                children = ((ContentPane) parent).getChildrenList();
-            }
-
-            for (int i = 0; i < children.size(); i++)
-            {
-                if (children.get(i) == sibling)
-                {
-                    pane = (ContentPane) parent;
-                }
-                else if (children.get(i) instanceof Parent)
-                {
-                    stack.push((Parent) children.get(i));
-                }
-            }
+          pane = (ContentPane) parent;
         }
-        return pane;
-    }
-
-    public boolean removeNode(Stack<Parent> stack, Node node)
-    {
-        List<Node> children = getChildrenList();
-
-        for (int i = 0; i < children.size(); i++)
+        else if (children.get(i) instanceof Parent)
         {
-            if (children.get(i) == node)
-            {
-                getTabs().remove(i);
-                return true;
-            }
+          stack.push((Parent) children.get(i));
         }
-
-        return false;
+      }
     }
+    return pane;
+  }
 
-    public void set(int idx, Node node)
+  public boolean removeNode(Stack<Parent> stack, Node node)
+  {
+    List<Node> children = getChildrenList();
+
+    for (int i = 0; i < children.size(); i++)
     {
-        DockNode newNode = (DockNode) node;
-        getTabs().set(idx, new DockNodeTab(newNode));
-        getSelectionModel().select(idx);
+      if (children.get(i) == node)
+      {
+        getTabs().remove(i);
+        return true;
+      }
     }
 
-    public void set(Node sibling, Node node)
-    {
-        set(getChildrenList().indexOf(sibling), node);
-    }
+    return false;
+  }
 
-    public List<Node> getChildrenList()
-    {
-        return getTabs().stream()
-                .map(i -> i.getContent())
-                .collect(Collectors.toList());
-    }
+  public void set(int idx, Node node)
+  {
+	DockNodeTab t = makeDNT(node);
+	
+	getTabs().set(idx, t);
+    getSelectionModel().select(idx);
+  }
 
-    public void addNode(Node root,
-                        Node sibling,
-                        Node node,
-                        DockPos dockPos)
-    {
-        DockNode newNode = (DockNode) node;
-        DockNodeTab t = new DockNodeTab(newNode);
-        addDockNodeTab(t);
-    }
+  public void set(Node sibling, Node node)
+  {
+    set(getChildrenList().indexOf(sibling), node);
+  }
 
-    public void addDockNodeTab(DockNodeTab dockNodeTab)
-    {
-        dockNodeTab.setTooltip(new Tooltip(dockNodeTab.getTitle()));
-        getTabs().add(dockNodeTab);
-        getSelectionModel().select(dockNodeTab);
-    }
+  public List<Node> getChildrenList()
+  {
+    return getTabs().stream()
+                    .map(i -> i.getContent())
+                    .collect(Collectors.toList());
+  }
 
-    @Override
-    protected double computeMaxWidth(double height)
-    {
-        return getTabs().stream()
-                .map(i -> i.getContent().maxWidth(height))
-                .min(Comparator.naturalOrder())
-                .get();
-    }
+  public void addNode(Node root,
+                      Node sibling,
+                      Node node,
+                      DockPos dockPos)
+  {
+    DockNodeTab t = makeDNT(node);
+    addDockNodeTab(t);
+  }
+  private DockNodeTab makeDNT(Node node) {
+	DockNode newNode = (DockNode) node;
+    DockNodeTab t = new DockNodeTab(newNode);
+    setUpSelectionEvent(t);
+	return t;
+  }
+
+	public void addDockNodeTab(DockNodeTab dockNodeTab) {
+		setUpSelectionEvent(dockNodeTab);
+		dockNodeTab.setTooltip(new Tooltip(dockNodeTab.getTitle()));
+		getTabs().add(dockNodeTab);
+		getSelectionModel().select(dockNodeTab);
+
+	}
+	private void setUpSelectionEvent(DockNodeTab dockNodeTab) {
+		dockNodeTab.dockNode.setFocusRequestListener(() -> {
+			Platform.runLater(() -> {
+				javafx.scene.control.SingleSelectionModel<Tab> selectionModel = getSelectionModel();
+				selectionModel.select(dockNodeTab);
+			});
+		});
+	}
+
+  @Override
+  protected double computeMaxWidth(double height)
+  {
+    return getTabs().stream()
+                    .map(i -> i.getContent().maxWidth(height))
+                    .min(Comparator.naturalOrder())
+                    .get();
+  }
 }
