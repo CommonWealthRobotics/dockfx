@@ -52,6 +52,18 @@ import org.dockfx.viewControllers.DockFXViewController;
  */
 public class DockNode extends VBox implements EventHandler<MouseEvent>, IWindowsProvider
 {
+	private static IStageModifyer modifyer = new IStageModifyer() {
+
+		@Override
+		public void onNewStage(javafx.stage.Stage s) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		
+	};
+  private static ArrayList<javafx.stage.Stage> stages = new ArrayList<javafx.stage.Stage>();
+
   /**
    * The style this dock node should use on its stage when set to floating.
    */
@@ -59,7 +71,7 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>, IWindows
   /**
    * The stage that this dock node is currently using when floating.
    */
-  private Stage stage;
+  private javafx.stage.Stage stage;
 
   /**
    * The contents of the dock node, i.e. a TreeView or ListView.
@@ -460,8 +472,9 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>, IWindows
         this.undock();
       }
 
-      stage = new Stage();
-      stages.add(stage);
+      Stage s = new Stage();
+      addStageToDockingSystem(s);
+      stage=s;
       dockPane.getScene()
               .getWindow()
               .addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST,
@@ -602,8 +615,8 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>, IWindows
       // we want to set the client area size
       // without this it subtracts the native border sizes from the scene
       // size
+	  modifyer.onNewStage(s);
       stage.sizeToScene();
-
       stage.show();
     }
     else if (!floating && this.isFloating())
@@ -618,6 +631,9 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>, IWindows
       stage.close();
     }
   }
+	public static void addStageToDockingSystem(Stage s) {
+		stages.add(s);
+	}
 
   /**
    * Whether the node is currently floating.
@@ -1228,7 +1244,6 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>, IWindows
    */
   private boolean sizeWest = false, sizeEast = false,
       sizeNorth = false, sizeSouth = false;
-  private static ArrayList<Stage> stages = new ArrayList<Stage>();
 
   /**
    * Gets whether the mouse is currently in this dock node's resize zone.
@@ -1380,5 +1395,11 @@ public Runnable getFocusRequestListener() {
 }
 public void setFocusRequestListener(Runnable focusRequestListener) {
 	this.focusRequestListener = focusRequestListener;
+}
+public static IStageModifyer getModifyer() {
+	return modifyer;
+}
+public static void setModifyer(IStageModifyer m) {
+	modifyer = m;
 }
 }
