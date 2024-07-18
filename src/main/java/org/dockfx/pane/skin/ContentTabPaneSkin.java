@@ -1221,7 +1221,8 @@ public class ContentTabPaneSkin extends SkinBase<TabPane> {
             setId(tab.getId());
             setStyle(tab.getStyle());
             setAccessibleRole(AccessibleRole.TAB_ITEM);
-            toBack();
+            //toBack();
+            //setViewOrder(1);
 
             this.tab = tab;
             clip = new Rectangle();
@@ -2049,11 +2050,16 @@ public class ContentTabPaneSkin extends SkinBase<TabPane> {
 //            }
 //        });
     }
-
+    private long timeSinceLastClick=0;
     private void handleHeaderMousePressed(MouseEvent event) {
         if (event.getButton().equals(MouseButton.PRIMARY)) {
             ((StackPane) event.getSource()).setMouseTransparent(true);
             startDrag(event);
+            if(System.currentTimeMillis()-timeSinceLastClick<300) {
+            	System.out.println("Move tab to the left ");
+            	dragTabHeader.toBack();
+            }
+            timeSinceLastClick=System.currentTimeMillis();
         }
     }
 
@@ -2212,7 +2218,7 @@ public class ContentTabPaneSkin extends SkinBase<TabPane> {
             xLayoutDirection = deriveTabHeaderLayoutXDirection();
             dragEventPrevLoc = getHeaderRegionLocalX(event);
             dragTabHeaderIndex = headersRegion.getChildren().indexOf(dragTabHeader);
-            dragTabHeader.toFront();
+            //dragTabHeader.toFront();
             dragHeaderStartX = dragHeaderDestX = dragTabHeader.getLayoutX();
         }
     }
@@ -2298,7 +2304,7 @@ public class ContentTabPaneSkin extends SkinBase<TabPane> {
     }
     private void resetDrag() {
         dragState = DragState.NONE;
-        dragTabHeader.toBack();
+        //dragTabHeader.toBack();
         dragTabHeader = null;
         dropTabHeader = null;
         headersRegion.requestLayout();
