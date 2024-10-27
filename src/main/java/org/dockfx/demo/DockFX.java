@@ -184,8 +184,9 @@ public class DockFX extends Application
                                   Boolean oldValue,
                                   Boolean newValue)
               {
-                if (newValue)
-                  System.out.println("TreeDock(DockPos.RIGHT) is closed.");
+                if (newValue) {
+                  //System.out.println("TreeDock(DockPos.RIGHT) is closed.");
+                }
               }
             });
 

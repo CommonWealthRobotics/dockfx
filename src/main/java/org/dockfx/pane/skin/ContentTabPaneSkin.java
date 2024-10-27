@@ -2056,7 +2056,7 @@ public class ContentTabPaneSkin extends SkinBase<TabPane> {
             ((StackPane) event.getSource()).setMouseTransparent(true);
             startDrag(event);
             if(System.currentTimeMillis()-timeSinceLastClick<300) {
-            	System.out.println("Move tab to the left ");
+            	//System.out.println("Move tab to the left ");
             	dragTabHeader.toBack();
             }
             timeSinceLastClick=System.currentTimeMillis();

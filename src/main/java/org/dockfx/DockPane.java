@@ -913,7 +913,7 @@ public class DockPane extends StackPane
 
     for (int i = 0; i < floatingNodes.size(); i++)
     {
-      // System.out.println(floatingNodes.get(i).getTitle());
+      // com.neuronrobotics.sdk.common.Log.error(floatingNodes.get(i).getTitle());
       ContentHolder floatingNode =
                                  new ContentHolder(floatingNodes.get(i)
                                                                 .getTitle(),
@@ -1008,11 +1008,11 @@ public class DockPane extends StackPane
       {
         dockingNodes.add((DockNode) node);
         holder.addChild(((DockNode) node).getTitle());
-        // System.out.println( ( ( DockNode ) node ).getTitle() );
+        // com.neuronrobotics.sdk.common.Log.error( ( ( DockNode ) node ).getTitle() );
       }
       // else
       // {
-      // System.out.println( node.getClass().getCanonicalName() );
+      // com.neuronrobotics.sdk.common.Log.error( node.getClass().getCanonicalName() );
       // }
 
       if (node instanceof ContentPane)
@@ -1171,7 +1171,7 @@ public class DockPane extends StackPane
       }
       else
       {
-        System.err.println(item + " is not present.");
+        //com.neuronrobotics.sdk.common.Log.error(item + " is not present.");
       }
     }
 
@@ -1248,8 +1248,9 @@ public class DockPane extends StackPane
                 splitPane.getItems().add(newNode);
               }
             }
-            else
-              System.err.println(item + " is not present.");
+            else {
+              //com.neuronrobotics.sdk.common.Log.error(item + " is not present.");
+            }
           }
         }
         else if (item instanceof ContentHolder)
@@ -1292,8 +1293,9 @@ public class DockPane extends StackPane
                 dockNodeList.add(newNode);
               }
             }
-            else
-              System.err.println(item + " is not present.");
+            else {
+              //com.neuronrobotics.sdk.common.Log.error(item + " is not present.");
+              }
           }
         }
       }
