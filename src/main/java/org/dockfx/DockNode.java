@@ -56,7 +56,7 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>, IWindows
 
 		@Override
 		public void onNewStage(javafx.stage.Stage s) {
-			// TODO Auto-generated method stub
+			// Auto-generated method stub
 			
 		}
 		
@@ -1387,7 +1387,7 @@ public class DockNode extends VBox implements EventHandler<MouseEvent>, IWindows
 
 @Override
 public ArrayList<Stage> get() {
-	// TODO Auto-generated method stub
+	// Auto-generated method stub
 	return stages;
 }
 public Runnable getFocusRequestListener() {
