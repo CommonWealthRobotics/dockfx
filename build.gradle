@@ -76,7 +76,11 @@ ext {
 ext.depver = { name -> project.ext.versionsMap[name] }
 
 tasks.create(name: 'gitExecutableHooks').doLast {
-    Runtime.getRuntime().exec("chmod -R +x .git/hooks/");
+    if (System.getProperty('os.name').toLowerCase().contains('windows')) {
+        logger.lifecycle('Skipping chmod on Windows')
+    } else {
+        Runtime.getRuntime().exec("chmod -R +x .git/hooks/")
+    }
 }
 
 task installGitHooks(type: Copy) {
